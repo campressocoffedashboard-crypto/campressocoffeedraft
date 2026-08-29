@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Campresso Coffee - Command Center</title>
     
+    <!-- PWA, Favicon & App Icons -->
+    <link rel="icon" href="https://i.postimg.cc/CKN201K0/image.png" type="image/png">
+    <link rel="apple-touch-icon" href="https://i.postimg.cc/CKN201K0/image.png">
+    <meta name="theme-color" content="#f97316">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="manifest" href="data:application/manifest+json;base64,eyJuYW1lIjoiQ2FtcHJlc3NvIENvZmZlZSIsInNob3J0X25hbWUiOiJDYW1wcmVzc28iLCJzdGFydF91cmwiOiIvIiwiZGlzcGxheSI6InN0YW5kYWxvbmUiLCJiYWNrZ3JvdW5kX2NvbG9yIjoiI2ZkZjhmNSIsInRoZW1lX2NvbG9yIjoiI2Y5NzMxNiIsImljb25zIjpbeyJzcmMiOiJodHRwczovL2kucG9zdGltZy5jYy9DS04yMDFLMC9pbWFnZS5wbmciLCJzaXplcyI6IjUxMng1MTIiLCJ0eXBlIjoiaW1hZ2UvcG5nIiwicHVycG9zZSI6ImFueSBtYXNrYWJsZSJ9XX0=">
+
     <!-- Google Fonts: Inter for that clean, modern look -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -72,13 +80,6 @@
             color: white;
         }
         .nav-item.active.nav-alert i { color: white; }
-
-        /* Loader animation */
-        .loader {
-            border: 3px solid #f3f3f3; border-top: 3px solid #f97316;
-            border-radius: 50%; width: 24px; height: 24px; animation: spin 1s linear infinite;
-        }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         
         /* Hide sections by default */
         .view-section { display: none; }
@@ -91,9 +92,7 @@
 <aside class="w-64 bg-brand-sidebar h-full flex flex-col shadow-soft z-20 relative rounded-r-3xl my-2 ml-2 transition-all duration-300">
     <!-- Logo Area -->
     <div class="p-8 flex items-center gap-3">
-        <div class="w-8 h-8 rounded-full bg-brand-orange flex items-center justify-center text-white font-bold text-lg shadow-lg">
-            C
-        </div>
+        <img src="https://i.postimg.cc/CKN201K0/image.png" alt="Campresso Logo" class="w-10 h-10 rounded-full shadow-md object-cover border border-brand-orangeLight bg-white p-0.5">
         <span class="font-bold text-xl tracking-tight">Campresso</span>
     </div>
 
@@ -150,6 +149,10 @@
                 <p class="text-xs text-brand-textMuted">Command Center</p>
             </div>
         </div>
+        <!-- Sidebar Footer -->
+        <div class="text-center mt-5 text-[10px] text-gray-400 font-medium">
+            Copyright © Campressocoffee
+        </div>
     </div>
 </aside>
 
@@ -161,9 +164,10 @@
         </div>
         
         <div class="flex items-center gap-4">
-            <!-- Loading Indicator -->
-            <div id="loadingIndicator" class="flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-sm text-sm text-brand-textMuted hidden">
-                <div class="loader"></div> Loading Data...
+            <!-- Loading Indicator (Replaced with Logo) -->
+            <div id="loadingIndicator" class="flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-sm text-sm text-brand-textMuted hidden border border-gray-100">
+                <img src="https://i.postimg.cc/CKN201K0/image.png" alt="Loading" class="w-5 h-5 rounded-full animate-spin"> 
+                Loading Data...
             </div>
             
             <!-- Date / Branch selector mimic -->
@@ -175,7 +179,7 @@
         </div>
     </header>
 
-    <div class="p-8 pt-0 flex-1 relative">
+    <div class="p-8 pt-0 flex-1 relative flex flex-col">
         
         <section id="view-overview" class="view-section active space-y-6">
             
@@ -336,8 +340,8 @@
                 <div class="bg-blue-50 border border-blue-100 rounded-xl p-4 mb-6 flex gap-3 text-blue-700">
                     <i class="ph ph-info mt-0.5 text-lg"></i>
                     <div class="text-sm">
-                        <strong>Live Memory Update:</strong> Any stock updates made here will instantly reflect across your Dashboard, Charts, and Data Tables. 
-                        <span class="opacity-75">(Note: Since the database is a read-only CSV link, data will reset to original if you refresh the page).</span>
+                        <strong>Kemas Kini Stok Interaktif:</strong> Segala perubahan stok di sini akan terus dipaparkan di Papan Pemuka. 
+                        <span class="opacity-75 block mt-1">💡 Anda boleh pilih kategori & item sedia ada, ATAU pilih <b>"+ Add New Item"</b> jika item belum wujud. Klik <b>"Add Another Item"</b> untuk kemas kini pelbagai stok serentak!</span>
                     </div>
                 </div>
 
@@ -363,6 +367,11 @@
                 </div>
             </div>
         </section>
+
+        <!-- Main Content Footer -->
+        <footer class="mt-auto pt-10 pb-2 text-center text-xs text-gray-400 font-medium">
+            Copyright © Campressocoffee
+        </footer>
 
     </div>
 </main>
