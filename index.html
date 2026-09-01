@@ -8,7 +8,7 @@
     <!-- PWA, Favicon & App Icons -->
     <link rel="icon" href="https://i.postimg.cc/CKN201K0/image.png" type="image/png">
     <link rel="apple-touch-icon" href="https://i.postimg.cc/CKN201K0/image.png">
-    <meta name="theme-color" content="#f97316">
+    <meta name="theme-color" content="#16a34a">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="manifest" href="data:application/manifest+json;base64,eyJuYW1lIjoiQ2FtcHJlc3NvIENvZmZlZSIsInNob3J0X25hbWUiOiJDYW1wcmVzc28iLCJzdGFydF91cmwiOiIvIiwiZGlzcGxheSI6InN0YW5kYWxvbmUiLCJiYWNrZ3JvdW5kX2NvbG9yIjoiI2ZkZjhmNSIsInRoZW1lX2NvbG9yIjoiI2Y5NzMxNiIsImljb25zIjpbeyJzcmMiOiJodHRwczovL2kucG9zdGltZy5jYy9DS04yMDFLMC9pbWFnZS5wbmciLCJzaXplcyI6IjUxMng1MTIiLCJ0eXBlIjoiaW1hZ2UvcG5nIiwicHVycG9zZSI6ImFueSBtYXNrYWJsZSJ9XX0=">
@@ -37,14 +37,16 @@
                     },
                     colors: {
                         brand: {
-                            orange: '#f97316',
-                            orangeLight: '#ffedd5',
-                            bg: '#fdf8f5',
-                            sidebar: '#ffffff',
+                            primary: '#16a34a', // Emerald/Green 600
+                            primaryLight: '#dcfce7', // Green 100
+                            primaryDark: '#15803d', // Green 700
+                            bg: '#eef5f1', // Light grayish green like the image bg
+                            sidebar: '#17332b', // Dark forest green (macam sidebar dalam gambar)
+                            sidebarActive: '#244a40', // Highlight sidebar aktif
                             card: '#ffffff',
                             textMain: '#1e293b',
                             textMuted: '#64748b',
-                            border: '#f1f5f9'
+                            border: '#e2e8f0'
                         }
                     },
                     boxShadow: {
@@ -68,11 +70,12 @@
         ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
         
         .nav-item.active {
-            background-color: #333333; 
+            background-color: theme('colors.brand.sidebarActive'); 
             color: white;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            border: 1px solid rgba(255,255,255,0.05);
         }
-        .nav-item.active i { color: theme('colors.brand.orange'); }
+        .nav-item.active i { color: theme('colors.brand.primary'); }
         
         /* Highlight specific red active state for Low Stock tab */
         .nav-item.active.nav-alert {
@@ -87,54 +90,54 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
-<body class="text-brand-textMain h-screen overflow-hidden flex selection:bg-brand-orangeLight selection:text-brand-orange">
+<body class="text-brand-textMain h-screen overflow-hidden flex selection:bg-brand-primaryLight selection:text-brand-primaryDark">
 
 <aside class="w-64 bg-brand-sidebar h-full flex flex-col shadow-soft z-20 relative rounded-r-3xl my-2 ml-2 transition-all duration-300">
     <!-- Logo Area -->
     <div class="p-8 flex items-center gap-3">
-        <img src="https://i.postimg.cc/CKN201K0/image.png" alt="Campresso Logo" class="w-10 h-10 rounded-full shadow-md object-cover border border-brand-orangeLight bg-white p-0.5">
-        <span class="font-bold text-xl tracking-tight">Campresso</span>
+        <img src="https://i.postimg.cc/CKN201K0/image.png" alt="Campresso Logo" class="w-10 h-10 rounded-full shadow-md object-cover border-2 border-brand-primary bg-white p-0.5">
+        <span class="font-bold text-xl tracking-tight text-white">Campresso</span>
     </div>
 
     <!-- Navigation Links -->
     <nav class="flex-1 px-4 space-y-2 overflow-y-auto" id="mainNav">
         <!-- Dashboard / Overview -->
-        <a href="#" data-target="view-overview" class="nav-item active flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-medium transition-colors hover:bg-gray-50 text-gray-600">
+        <a href="#" data-target="view-overview" class="nav-item active flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-medium transition-colors hover:bg-white/10 text-gray-300 hover:text-white">
             <i class="ph ph-squares-four text-lg"></i>
             Overview
         </a>
 
         <!-- Manage Stock Form Tab -->
-        <a href="#" data-target="view-stock-form" class="nav-item flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-medium transition-colors hover:bg-gray-50 text-gray-600 mt-2">
+        <a href="#" data-target="view-stock-form" class="nav-item flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-medium transition-colors hover:bg-white/10 text-gray-300 hover:text-white mt-2">
             <i class="ph ph-list-plus text-lg"></i>
             Manage Stock (In/Out)
         </a>
 
         <!-- Special Tab for Low Stock -->
-        <a href="#" data-target="view-table" data-category="Low Stock" id="navLowStock" class="nav-item nav-alert flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-medium transition-colors hover:bg-red-50 text-red-500 mt-2">
+        <a href="#" data-target="view-table" data-category="Low Stock" id="navLowStock" class="nav-item nav-alert flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-medium transition-colors hover:bg-red-500/20 text-red-400 hover:text-red-300 mt-2">
             <i class="ph ph-warning-circle text-lg"></i>
             Low Stock Alerts
         </a>
         
-        <div class="pt-4 pb-2 px-4 text-xs font-semibold text-brand-textMuted uppercase tracking-wider">Inventory Categories</div>
+        <div class="pt-4 pb-2 px-4 text-xs font-semibold text-brand-primaryLight/50 uppercase tracking-wider">Inventory Categories</div>
         
-        <a href="#" data-target="view-table" data-category="Beverage" class="nav-item flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-medium transition-colors hover:bg-gray-50 text-gray-600">
+        <a href="#" data-target="view-table" data-category="Beverage" class="nav-item flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-medium transition-colors hover:bg-white/10 text-gray-300 hover:text-white">
             <i class="ph ph-coffee text-lg"></i>
             Beverage
         </a>
-        <a href="#" data-target="view-table" data-category="Foods" class="nav-item flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-medium transition-colors hover:bg-gray-50 text-gray-600">
+        <a href="#" data-target="view-table" data-category="Foods" class="nav-item flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-medium transition-colors hover:bg-white/10 text-gray-300 hover:text-white">
             <i class="ph ph-hamburger text-lg"></i>
             Foods
         </a>
-        <a href="#" data-target="view-table" data-category="Consumables" class="nav-item flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-medium transition-colors hover:bg-gray-50 text-gray-600">
+        <a href="#" data-target="view-table" data-category="Consumables" class="nav-item flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-medium transition-colors hover:bg-white/10 text-gray-300 hover:text-white">
             <i class="ph ph-package text-lg"></i>
             Consumables
         </a>
-        <a href="#" data-target="view-table" data-category="Cleaning" class="nav-item flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-medium transition-colors hover:bg-gray-50 text-gray-600">
+        <a href="#" data-target="view-table" data-category="Cleaning" class="nav-item flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-medium transition-colors hover:bg-white/10 text-gray-300 hover:text-white">
             <i class="ph ph-broom text-lg"></i>
             Cleaning
         </a>
-        <a href="#" data-target="view-table" data-category="Furnitures" class="nav-item flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-medium transition-colors hover:bg-gray-50 text-gray-600">
+        <a href="#" data-target="view-table" data-category="Furnitures" class="nav-item flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-medium transition-colors hover:bg-white/10 text-gray-300 hover:text-white">
             <i class="ph ph-armchair text-lg"></i>
             Furnitures
         </a>
@@ -142,15 +145,15 @@
 
     <!-- User Profile Area (Bottom) -->
     <div class="p-4 mt-auto">
-        <div class="bg-gray-50 rounded-2xl p-3 flex items-center gap-3 border border-brand-border">
-            <img src="https://ui-avatars.com/api/?name=Admin+User&background=f97316&color=fff" alt="User" class="w-10 h-10 rounded-full shadow-sm">
+        <div class="bg-brand-sidebarActive/50 rounded-2xl p-3 flex items-center gap-3 border border-white/5">
+            <img src="https://ui-avatars.com/api/?name=Admin+User&background=16a34a&color=fff" alt="User" class="w-10 h-10 rounded-full shadow-sm">
             <div>
-                <p class="text-sm font-semibold">Admin Manager</p>
-                <p class="text-xs text-brand-textMuted">Command Center</p>
+                <p class="text-sm font-semibold text-white">Admin Manager</p>
+                <p class="text-xs text-gray-400">Command Center</p>
             </div>
         </div>
         <!-- Sidebar Footer -->
-        <div class="text-center mt-5 text-[10px] text-gray-400 font-medium">
+        <div class="text-center mt-5 text-[10px] text-gray-500 font-medium">
             Copyright © Campressocoffee
         </div>
     </div>
@@ -172,7 +175,7 @@
             
             <!-- Date / Branch selector mimic -->
             <div class="bg-white px-4 py-2 rounded-full shadow-sm flex items-center gap-2 text-sm font-medium cursor-pointer border border-brand-border">
-                <span class="w-2 h-2 rounded-full bg-brand-orange"></span>
+                <span class="w-2 h-2 rounded-full bg-brand-primary"></span>
                 Campresso HQ
                 <i class="ph ph-caret-down text-brand-textMuted"></i>
             </div>
@@ -215,7 +218,7 @@
                 <!-- Left: Bar Chart -->
                 <div class="bg-brand-card p-6 rounded-3xl shadow-soft flex flex-col border border-brand-border/50">
                     <div class="flex items-center gap-2 mb-4 text-sm font-bold text-gray-700 uppercase tracking-wide">
-                        <i class="ph ph-chart-bar text-brand-orange text-lg"></i>
+                        <i class="ph ph-chart-bar text-brand-primary text-lg"></i>
                         Inventory By Department
                     </div>
                     <div class="flex-1 relative w-full h-[220px]">
@@ -226,7 +229,7 @@
                 <!-- Right: Doughnut Chart -->
                 <div class="bg-brand-card p-6 rounded-3xl shadow-soft flex flex-col border border-brand-border/50">
                     <div class="flex items-center gap-2 mb-4 text-sm font-bold text-gray-700 uppercase tracking-wide">
-                        <i class="ph ph-chart-donut text-brand-orange text-lg"></i>
+                        <i class="ph ph-chart-donut text-brand-primary text-lg"></i>
                         Inventory Stock Status
                     </div>
                     <div class="relative flex-1 flex items-center justify-center min-h-[220px]">
@@ -234,7 +237,7 @@
                         <!-- Inner text -->
                         <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
                             <span class="text-xs text-brand-textMuted mb-1">Total</span>
-                            <span id="doughnutTotalText" class="text-2xl font-bold text-brand-orange">0</span>
+                            <span id="doughnutTotalText" class="text-2xl font-bold text-brand-primary">0</span>
                         </div>
                     </div>
                 </div>
@@ -243,7 +246,7 @@
             <!-- Row 3: Full Width Chart -->
             <div class="bg-brand-card p-6 rounded-3xl shadow-soft flex flex-col border border-brand-border/50">
                 <div class="flex items-center gap-2 mb-4 text-sm font-bold text-gray-700 uppercase tracking-wide">
-                    <i class="ph ph-trend-up text-brand-orange text-lg"></i>
+                    <i class="ph ph-trend-up text-brand-primary text-lg"></i>
                     Current Stock Level (By Category)
                 </div>
                 <div class="w-full h-[200px]">
@@ -293,9 +296,9 @@
                 <div class="p-5 border-b border-gray-100 flex justify-between items-center bg-white/50">
                     <div class="relative">
                         <i class="ph ph-magnifying-glass absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
-                        <input type="text" id="tableSearch" placeholder="Search items..." class="pl-9 pr-4 py-2 bg-gray-50 border-none rounded-xl text-sm focus:ring-2 focus:ring-brand-orange/20 outline-none w-64 transition-all">
+                        <input type="text" id="tableSearch" placeholder="Search items..." class="pl-9 pr-4 py-2 bg-gray-50 border-none rounded-xl text-sm focus:ring-2 focus:ring-brand-primary/20 outline-none w-64 transition-all">
                     </div>
-                    <button class="bg-brand-orange text-white px-4 py-2 rounded-xl text-sm font-medium hover:bg-orange-600 transition-colors shadow-sm shadow-orange-200">
+                    <button class="bg-brand-primary text-white px-4 py-2 rounded-xl text-sm font-medium hover:bg-brand-primaryDark transition-colors shadow-sm shadow-green-200">
                         <i class="ph ph-export mr-1"></i> Export
                     </button>
                 </div>
@@ -311,7 +314,7 @@
                                 <th class="px-6 py-4 font-semibold">Location</th>
                                 <th class="px-6 py-4 font-semibold text-right">Stock In</th>
                                 <th class="px-6 py-4 font-semibold text-right">Used</th>
-                                <th class="px-6 py-4 font-semibold text-right text-brand-orange">Current</th>
+                                <th class="px-6 py-4 font-semibold text-right text-brand-primary">Current</th>
                                 <th class="px-6 py-4 font-semibold text-center">Status</th>
                                 <th class="px-6 py-4 font-semibold">Vendor</th>
                             </tr>
@@ -328,7 +331,7 @@
                     <div class="flex gap-2 items-center">
                         <button id="mainPrevBtn" class="px-3 py-1.5 bg-gray-100 rounded-lg hover:bg-gray-200 disabled:opacity-50 transition-colors text-gray-700 font-medium">Previous</button>
                         <span id="mainPageInd" class="px-3 py-1 font-semibold text-gray-700 bg-gray-50 rounded-lg border border-gray-100">1 / 1</span>
-                        <button id="mainNextBtn" class="px-3 py-1.5 bg-brand-orange text-white rounded-lg hover:bg-orange-600 disabled:opacity-50 disabled:bg-gray-300 transition-colors font-medium">Next</button>
+                        <button id="mainNextBtn" class="px-3 py-1.5 bg-brand-primary text-white rounded-lg hover:bg-brand-primaryDark disabled:opacity-50 disabled:bg-gray-300 transition-colors font-medium">Next</button>
                     </div>
                 </div>
             </div>
@@ -347,9 +350,9 @@
 
                 <div class="flex justify-between items-center mb-6">
                     <h2 class="text-lg font-bold text-gray-800 flex items-center gap-2">
-                        <i class="ph ph-list-plus text-brand-orange"></i> Update Inventory Stocks
+                        <i class="ph ph-list-plus text-brand-primary"></i> Update Inventory Stocks
                     </h2>
-                    <button id="addStockRowBtn" class="px-4 py-2 bg-brand-orange text-white rounded-xl text-sm font-medium hover:bg-orange-600 transition-colors shadow-sm shadow-orange-200">
+                    <button id="addStockRowBtn" class="px-4 py-2 bg-brand-primary text-white rounded-xl text-sm font-medium hover:bg-brand-primaryDark transition-colors shadow-sm shadow-green-200">
                         <i class="ph ph-plus mr-1"></i> Add Another Item
                     </button>
                 </div>
@@ -585,7 +588,7 @@
                     </td>
                     <td class="py-3 text-center text-gray-500">${item.min}</td>
                     <td class="py-3 text-right">
-                        <button class="px-3 py-1 bg-brand-orange text-white text-xs rounded-lg hover:bg-orange-600 shadow-sm transition-colors">Order</button>
+                        <button class="px-3 py-1 bg-brand-primary text-white text-xs rounded-lg hover:bg-brand-primaryDark shadow-sm transition-colors">Order</button>
                     </td>
                 `;
                 tbody.appendChild(tr);
@@ -658,7 +661,7 @@
 
         pageData.forEach((item, index) => {
             const tr = document.createElement('tr');
-            tr.className = 'hover:bg-orange-50/30 transition-colors group';
+            tr.className = 'hover:bg-brand-primaryLight/30 transition-colors group';
             
             const stockIn = parseInt(item['STOCK IN']) || 0;
             const used = parseInt(item['STOCK USED']) || 0;
@@ -683,7 +686,7 @@
                 <td class="px-6 py-4 text-gray-500 text-xs whitespace-nowrap">${item['LOCATION'] || '-'}</td>
                 <td class="px-6 py-4 text-right">${stockIn}</td>
                 <td class="px-6 py-4 text-right">${used}</td>
-                <td class="px-6 py-4 text-right font-bold text-brand-orange text-lg">${current}</td>
+                <td class="px-6 py-4 text-right font-bold text-brand-primary text-lg">${current}</td>
                 <td class="px-6 py-4 text-center">
                     <span class="px-2 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${statusClass} whitespace-nowrap">${status}</span>
                 </td>
@@ -764,17 +767,17 @@
             <div class="grid grid-cols-1 md:grid-cols-4 gap-5">
                 <div>
                     <label class="block text-[11px] font-bold text-gray-500 mb-1.5 uppercase tracking-wider">Category</label>
-                    <select class="cat-select w-full p-2.5 bg-white border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-brand-orange/20 outline-none transition-shadow text-gray-700">
+                    <select class="cat-select w-full p-2.5 bg-white border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-brand-primary/20 outline-none transition-shadow text-gray-700">
                         <option value="">Select Category...</option>
                         ${Object.keys(categories).map(cat => `<option value="${cat}">${cat}</option>`).join('')}
                     </select>
                 </div>
                 <div>
                     <label class="block text-[11px] font-bold text-gray-500 mb-1.5 uppercase tracking-wider">Item Name</label>
-                    <select class="item-select w-full p-2.5 bg-white border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-brand-orange/20 outline-none disabled:bg-gray-100 transition-shadow text-gray-700" disabled>
+                    <select class="item-select w-full p-2.5 bg-white border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-brand-primary/20 outline-none disabled:bg-gray-100 transition-shadow text-gray-700" disabled>
                         <option value="">Select Item...</option>
                     </select>
-                    <input type="text" class="new-item-name hidden w-full p-2.5 mt-2 bg-orange-50 border border-brand-orange rounded-xl text-sm focus:ring-2 focus:ring-brand-orange/20 outline-none placeholder-gray-400 text-gray-800" placeholder="Enter new item name...">
+                    <input type="text" class="new-item-name hidden w-full p-2.5 mt-2 bg-brand-primaryLight/50 border border-brand-primary rounded-xl text-sm focus:ring-2 focus:ring-brand-primary/20 outline-none placeholder-gray-400 text-gray-800" placeholder="Enter new item name...">
                 </div>
                 <div>
                     <label class="block text-[11px] font-bold text-green-600 mb-1.5 uppercase tracking-wider">Stock In (+)</label>
@@ -790,15 +793,15 @@
             <div class="new-item-fields hidden grid-cols-1 md:grid-cols-3 gap-5 mt-5 pt-5 border-t border-gray-200/60">
                  <div>
                     <label class="block text-[11px] font-bold text-gray-400 mb-1.5 uppercase tracking-wider">Unit (e.g., Kg, Pcs)</label>
-                    <input type="text" class="unit-input w-full p-2.5 bg-white border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-brand-orange/20 outline-none">
+                    <input type="text" class="unit-input w-full p-2.5 bg-white border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-brand-primary/20 outline-none">
                 </div>
                 <div>
                     <label class="block text-[11px] font-bold text-gray-400 mb-1.5 uppercase tracking-wider">Location</label>
-                    <input type="text" class="location-input w-full p-2.5 bg-white border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-brand-orange/20 outline-none">
+                    <input type="text" class="location-input w-full p-2.5 bg-white border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-brand-primary/20 outline-none">
                 </div>
                 <div>
                     <label class="block text-[11px] font-bold text-gray-400 mb-1.5 uppercase tracking-wider">Vendor</label>
-                    <input type="text" class="vendor-input w-full p-2.5 bg-white border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-brand-orange/20 outline-none">
+                    <input type="text" class="vendor-input w-full p-2.5 bg-white border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-brand-primary/20 outline-none">
                 </div>
             </div>
         `;
@@ -848,7 +851,7 @@
             const newOpt = document.createElement('option');
             newOpt.value = '__NEW__';
             newOpt.textContent = '+ Add New Item...';
-            newOpt.className = 'font-bold text-brand-orange bg-orange-50';
+            newOpt.className = 'font-bold text-brand-primary bg-brand-primaryLight/50';
             itemSelect.appendChild(newOpt);
         });
         
@@ -1012,7 +1015,7 @@
                 labels: ['Healthy', 'Low/Out'],
                 datasets: [{
                     data: [healthyItems, lowStockCount],
-                    backgroundColor: ['#f97316', '#e2e8f0'],
+                    backgroundColor: ['#16a34a', '#e2e8f0'],
                     borderWidth: 0, hoverOffset: 4
                 }]
             },
