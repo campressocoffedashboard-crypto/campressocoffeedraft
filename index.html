@@ -27,7 +27,6 @@
     <!-- Chart.js for data visualization -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <!-- Tailwind Configuration -->
     <script>
         tailwind.config = {
             theme: {
@@ -40,8 +39,8 @@
                             primary: '#16a34a', // Emerald/Green 600
                             primaryLight: '#dcfce7', // Green 100
                             primaryDark: '#15803d', // Green 700
-                            bg: '#eef5f1', // Light grayish green like the image bg
-                            sidebar: '#17332b', // Dark forest green (macam sidebar dalam gambar)
+                            bg: '#eef5f1', // Light grayish green
+                            sidebar: '#17332b', // Dark forest green
                             sidebarActive: '#244a40', // Highlight sidebar aktif
                             card: '#ffffff',
                             textMain: '#1e293b',
@@ -84,13 +83,13 @@
         }
         .nav-item.active.nav-alert i { color: white; }
         
-        /* Hide sections by default */
-        .view-section { display: none; }
-        .view-section.active { display: block; animation: fadeIn 0.3s ease-in-out; }
+        /* Hide sections securely */
+        .view-section:not(.active) { display: none !important; }
+        .view-section.active { animation: fadeIn 0.3s ease-in-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
-<body class="text-brand-textMain h-screen overflow-hidden flex selection:bg-brand-primaryLight selection:text-brand-primaryDark">
+<body class="text-brand-textMain h-screen overflow-hidden flex selection:bg-brand-primaryLight selection:text-brand-primaryDark relative">
 
 <aside class="w-64 bg-brand-sidebar h-full flex flex-col shadow-soft z-20 relative rounded-r-3xl my-2 ml-2 transition-all duration-300">
     <!-- Logo Area -->
@@ -101,49 +100,36 @@
 
     <!-- Navigation Links -->
     <nav class="flex-1 px-4 space-y-2 overflow-y-auto" id="mainNav">
-        <!-- Dashboard / Overview -->
         <a href="#" data-target="view-overview" class="nav-item active flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-medium transition-colors hover:bg-white/10 text-gray-300 hover:text-white">
-            <i class="ph ph-squares-four text-lg"></i>
-            Overview
+            <i class="ph ph-squares-four text-lg"></i> Overview
         </a>
-
-        <!-- Manage Stock Form Tab -->
         <a href="#" data-target="view-stock-form" class="nav-item flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-medium transition-colors hover:bg-white/10 text-gray-300 hover:text-white mt-2">
-            <i class="ph ph-list-plus text-lg"></i>
-            Manage Stock (In/Out)
+            <i class="ph ph-list-plus text-lg"></i> Manage Stock (In/Out)
         </a>
-
-        <!-- Special Tab for Low Stock -->
         <a href="#" data-target="view-table" data-category="Low Stock" id="navLowStock" class="nav-item nav-alert flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-medium transition-colors hover:bg-red-500/20 text-red-400 hover:text-red-300 mt-2">
-            <i class="ph ph-warning-circle text-lg"></i>
-            Low Stock Alerts
+            <i class="ph ph-warning-circle text-lg"></i> Low Stock Alerts
         </a>
         
         <div class="pt-4 pb-2 px-4 text-xs font-semibold text-brand-primaryLight/50 uppercase tracking-wider">Inventory Categories</div>
         
         <a href="#" data-target="view-table" data-category="Beverage" class="nav-item flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-medium transition-colors hover:bg-white/10 text-gray-300 hover:text-white">
-            <i class="ph ph-coffee text-lg"></i>
-            Beverage
+            <i class="ph ph-coffee text-lg"></i> Beverage
         </a>
         <a href="#" data-target="view-table" data-category="Foods" class="nav-item flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-medium transition-colors hover:bg-white/10 text-gray-300 hover:text-white">
-            <i class="ph ph-hamburger text-lg"></i>
-            Foods
+            <i class="ph ph-hamburger text-lg"></i> Foods
         </a>
         <a href="#" data-target="view-table" data-category="Consumables" class="nav-item flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-medium transition-colors hover:bg-white/10 text-gray-300 hover:text-white">
-            <i class="ph ph-package text-lg"></i>
-            Consumables
+            <i class="ph ph-package text-lg"></i> Consumables
         </a>
         <a href="#" data-target="view-table" data-category="Cleaning" class="nav-item flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-medium transition-colors hover:bg-white/10 text-gray-300 hover:text-white">
-            <i class="ph ph-broom text-lg"></i>
-            Cleaning
+            <i class="ph ph-broom text-lg"></i> Cleaning
         </a>
         <a href="#" data-target="view-table" data-category="Furnitures" class="nav-item flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-medium transition-colors hover:bg-white/10 text-gray-300 hover:text-white">
-            <i class="ph ph-armchair text-lg"></i>
-            Furnitures
+            <i class="ph ph-armchair text-lg"></i> Furnitures
         </a>
     </nav>
 
-    <!-- User Profile Area (Bottom) -->
+    <!-- User Profile Area -->
     <div class="p-4 mt-auto">
         <div class="bg-brand-sidebarActive/50 rounded-2xl p-3 flex items-center gap-3 border border-white/5">
             <img src="https://ui-avatars.com/api/?name=Admin+User&background=16a34a&color=fff" alt="User" class="w-10 h-10 rounded-full shadow-sm">
@@ -152,10 +138,7 @@
                 <p class="text-xs text-gray-400">Command Center</p>
             </div>
         </div>
-        <!-- Sidebar Footer -->
-        <div class="text-center mt-5 text-[10px] text-gray-500 font-medium">
-            Copyright © Campressocoffee
-        </div>
+        <div class="text-center mt-5 text-[10px] text-gray-500 font-medium">Copyright © Campressocoffee</div>
     </div>
 </aside>
 
@@ -167,17 +150,13 @@
         </div>
         
         <div class="flex items-center gap-4">
-            <!-- Loading Indicator (Replaced with Logo) -->
             <div id="loadingIndicator" class="flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-sm text-sm text-brand-textMuted hidden border border-gray-100">
                 <img src="https://i.postimg.cc/CKN201K0/image.png" alt="Loading" class="w-5 h-5 rounded-full animate-spin"> 
-                Loading Data...
+                Syncing with DB...
             </div>
             
-            <!-- Date / Branch selector mimic -->
-            <div class="bg-white px-4 py-2 rounded-full shadow-sm flex items-center gap-2 text-sm font-medium cursor-pointer border border-brand-border">
-                <span class="w-2 h-2 rounded-full bg-brand-primary"></span>
-                Campresso HQ
-                <i class="ph ph-caret-down text-brand-textMuted"></i>
+            <div class="bg-white px-4 py-2 rounded-full shadow-sm flex items-center gap-2 text-sm font-medium cursor-pointer border border-brand-border hover:bg-gray-50 transition-colors" onclick="fetchAllData()">
+                <i class="ph ph-arrows-clockwise text-brand-primary"></i> Refresh
             </div>
         </div>
     </header>
@@ -185,14 +164,11 @@
     <div class="p-8 pt-0 flex-1 relative flex flex-col">
         
         <section id="view-overview" class="view-section active space-y-6">
-            
-            <!-- Row 1: KPI Top Bar -->
             <div class="grid grid-cols-2 lg:grid-cols-5 gap-4">
                 <div class="bg-brand-card p-5 rounded-2xl shadow-soft text-center border border-brand-border/50">
                     <div class="text-xs font-semibold text-brand-textMuted uppercase tracking-wider mb-1">Total Items</div>
                     <div class="text-3xl font-bold text-gray-800" id="kpiTotal">0</div>
                 </div>
-                <!-- Clickable Low Stock Card -->
                 <div id="kpiLowStockCard" class="bg-yellow-50 p-5 rounded-2xl shadow-soft text-center border border-yellow-200 cursor-pointer hover:bg-yellow-100 transition-colors group">
                     <div class="text-xs font-semibold text-yellow-700 uppercase tracking-wider mb-1 flex justify-center items-center gap-1">
                         Low Stock <i class="ph ph-arrow-up-right opacity-0 group-hover:opacity-100 transition-opacity"></i>
@@ -213,28 +189,23 @@
                 </div>
             </div>
 
-            <!-- Row 2: 50/50 Split Charts -->
+            <!-- Charts Row -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <!-- Left: Bar Chart -->
                 <div class="bg-brand-card p-6 rounded-3xl shadow-soft flex flex-col border border-brand-border/50">
                     <div class="flex items-center gap-2 mb-4 text-sm font-bold text-gray-700 uppercase tracking-wide">
-                        <i class="ph ph-chart-bar text-brand-primary text-lg"></i>
-                        Inventory By Department
+                        <i class="ph ph-chart-bar text-brand-primary text-lg"></i> Inventory By Department
                     </div>
                     <div class="flex-1 relative w-full h-[220px]">
                         <canvas id="deptBarChart"></canvas>
                     </div>
                 </div>
 
-                <!-- Right: Doughnut Chart -->
                 <div class="bg-brand-card p-6 rounded-3xl shadow-soft flex flex-col border border-brand-border/50">
                     <div class="flex items-center gap-2 mb-4 text-sm font-bold text-gray-700 uppercase tracking-wide">
-                        <i class="ph ph-chart-donut text-brand-primary text-lg"></i>
-                        Inventory Stock Status
+                        <i class="ph ph-chart-donut text-brand-primary text-lg"></i> Inventory Stock Status
                     </div>
                     <div class="relative flex-1 flex items-center justify-center min-h-[220px]">
                         <canvas id="healthDoughnutChart"></canvas>
-                        <!-- Inner text -->
                         <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
                             <span class="text-xs text-brand-textMuted mb-1">Total</span>
                             <span id="doughnutTotalText" class="text-2xl font-bold text-brand-primary">0</span>
@@ -243,23 +214,20 @@
                 </div>
             </div>
 
-            <!-- Row 3: Full Width Chart -->
+            <!-- Full Width Chart -->
             <div class="bg-brand-card p-6 rounded-3xl shadow-soft flex flex-col border border-brand-border/50">
                 <div class="flex items-center gap-2 mb-4 text-sm font-bold text-gray-700 uppercase tracking-wide">
-                    <i class="ph ph-trend-up text-brand-primary text-lg"></i>
-                    Current Stock Level (By Category)
+                    <i class="ph ph-trend-up text-brand-primary text-lg"></i> Current Stock Level (By Category)
                 </div>
                 <div class="w-full h-[200px]">
                     <canvas id="levelLineChart"></canvas>
                 </div>
             </div>
 
-            <!-- Row 4: Reorder List (Paginated) -->
             <div class="bg-brand-card p-6 rounded-3xl shadow-soft border border-brand-border/50 flex flex-col">
                 <div class="flex justify-between items-center mb-4">
                     <div class="flex items-center gap-2 text-sm font-bold text-gray-700 uppercase tracking-wide">
-                        <i class="ph ph-warning-circle text-yellow-500 text-lg"></i>
-                        Reorder List Overview
+                        <i class="ph ph-warning-circle text-yellow-500 text-lg"></i> Reorder List Overview
                     </div>
                 </div>
                 <div class="overflow-x-auto">
@@ -277,7 +245,6 @@
                         </tbody>
                     </table>
                 </div>
-                <!-- Pagination for Reorder List -->
                 <div class="pt-4 mt-2 flex justify-between items-center text-xs text-brand-textMuted border-t border-gray-100">
                     <span id="reorderTableShowing">Showing 0 entries</span>
                     <div class="flex gap-1 items-center">
@@ -292,7 +259,6 @@
         <section id="view-table" class="view-section h-full flex flex-col">
             <div class="bg-brand-card rounded-3xl shadow-soft overflow-hidden flex flex-col flex-1 border border-brand-border/50 h-[calc(100vh-140px)]">
                 
-                <!-- Table Toolbar -->
                 <div class="p-5 border-b border-gray-100 flex justify-between items-center bg-white/50">
                     <div class="relative">
                         <i class="ph ph-magnifying-glass absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
@@ -303,7 +269,6 @@
                     </button>
                 </div>
 
-                <!-- Table Container -->
                 <div class="overflow-auto flex-1 relative">
                     <table class="w-full text-left border-collapse min-w-max relative">
                         <thead class="sticky top-0 bg-gray-50 z-10 shadow-sm shadow-gray-100">
@@ -320,12 +285,10 @@
                             </tr>
                         </thead>
                         <tbody id="dataTableBody" class="text-sm divide-y divide-gray-50">
-                            <!-- Rows injected here -->
                         </tbody>
                     </table>
                 </div>
                 
-                <!-- Table Pagination/Footer -->
                 <div class="p-4 bg-white border-t border-gray-100 text-xs text-brand-textMuted flex justify-between items-center z-10">
                     <span id="tableShowingText">Showing 0 entries</span>
                     <div class="flex gap-2 items-center">
@@ -339,12 +302,10 @@
 
         <section id="view-stock-form" class="view-section space-y-6">
             <div class="bg-brand-card p-6 rounded-3xl shadow-soft border border-brand-border/50">
-                <!-- Info Banner -->
                 <div class="bg-blue-50 border border-blue-100 rounded-xl p-4 mb-6 flex gap-3 text-blue-700">
                     <i class="ph ph-info mt-0.5 text-lg"></i>
                     <div class="text-sm">
-                        <strong>Kemas Kini Stok Interaktif:</strong> Segala perubahan stok di sini akan terus dipaparkan di Papan Pemuka. 
-                        <span class="opacity-75 block mt-1">💡 Anda boleh pilih kategori & item sedia ada, ATAU pilih <b>"+ Add New Item"</b> jika item belum wujud. Klik <b>"Add Another Item"</b> untuk kemas kini pelbagai stok serentak!</span>
+                        <strong>Kemas Kini DB Aktif:</strong> Segala penambahan stok di sini akan disegerakkan (sync) dan disimpan terus ke dalam jadual Google Sheets anda.
                     </div>
                 </div>
 
@@ -357,15 +318,13 @@
                     </button>
                 </div>
 
-                <!-- Form Rows Container -->
                 <div id="stockFormContainer" class="space-y-4">
-                    <!-- Dynamic rows injected here via JS -->
+                    <!-- Dynamic rows injected here -->
                 </div>
 
-                <!-- Submit Action -->
                 <div class="mt-8 flex justify-end border-t border-gray-100 pt-6">
                     <button id="submitStockBtn" class="px-6 py-2.5 bg-green-500 text-white rounded-xl text-sm font-medium hover:bg-green-600 transition-colors shadow-sm shadow-green-200 flex items-center gap-2">
-                        <i class="ph ph-floppy-disk text-lg"></i> Save Changes
+                        <i class="ph ph-floppy-disk text-lg"></i> Save to Database
                     </button>
                 </div>
             </div>
@@ -379,122 +338,128 @@
     </div>
 </main>
 
+<!-- Order Action Modal -->
+<div id="orderModal" class="fixed inset-0 bg-black/60 z-50 hidden items-center justify-center backdrop-blur-sm transition-all opacity-0">
+    <div class="bg-white p-8 rounded-3xl w-full max-w-md shadow-2xl transform scale-95 transition-transform" id="orderModalInner">
+        <div class="flex items-center gap-3 mb-4 text-brand-primary">
+            <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+                <i class="ph ph-shopping-cart text-xl"></i>
+            </div>
+            <h3 class="font-bold text-xl text-gray-800">Order Stock In</h3>
+        </div>
+        <p class="text-sm text-gray-500 mb-6">Sila masukkan kuantiti yang akan diterima (restock) untuk <span id="orderModalItem" class="font-bold text-brand-primary text-base"></span>.</p>
+        
+        <label class="block text-xs font-bold text-gray-500 mb-1.5 uppercase tracking-wider">Kuantiti (+)</label>
+        <input type="number" id="orderModalQty" class="w-full border border-gray-200 rounded-xl p-3.5 mb-6 outline-none focus:ring-2 focus:ring-brand-primary/50 text-lg font-bold text-gray-800" value="10" min="1">
+        
+        <div class="flex justify-end gap-3">
+            <button id="orderModalCancel" class="px-5 py-2.5 bg-gray-100 text-gray-700 font-medium rounded-xl hover:bg-gray-200 transition-colors">Batal</button>
+            <button id="orderModalConfirm" class="px-5 py-2.5 bg-brand-primary text-white font-medium rounded-xl hover:bg-brand-primaryDark transition-colors shadow-md shadow-green-200 flex items-center gap-2">
+                <i class="ph ph-check-circle"></i> Sahkan Order
+            </button>
+        </div>
+    </div>
+</div>
+
 <div id="toastNotification" class="fixed bottom-8 right-8 transform translate-y-20 opacity-0 transition-all duration-300 bg-gray-900 text-white px-6 py-4 rounded-2xl shadow-2xl z-50 flex items-center gap-3 pointer-events-none">
     <i class="ph ph-check-circle text-green-400 text-2xl"></i>
     <span id="toastMsg" class="text-sm font-medium">Notification message</span>
 </div>
 
 <script>
-    // Configuration & State
-    const baseUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQy0__L-xT5ufNr6clEDWgy7oYkGFD1bqOtWgi9-TW_1INjid3n_rD9yBx-oIPM94H-nJVh8-oE2jHM/pub?output=csv&gid=';
-    const categories = {
-        'Beverage': '486998592',
-        'Foods': '1303672353',
-        'Consumables': '1414956571',
-        'Cleaning': '488987248',
-        'Furnitures': '2020373591'
-    };
+    // MASUKKAN URL APP SCRIPT ANDA DI BAWAH:
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby-UW15kBf_3AL2X8-Ms6TL8LJtFzG-bL0QzsXDxJW3634qKx4yfzM_X1tiPwf-PZBJ/exec';
     
-    // Pagination Constraints
+    // Fallback categories if empty DB
+    const predefinedCategories = ['BEVERAGE', 'FOODS', 'CONSUMABLES FOR SUPPLIES', 'CLEANING', 'FURNITURES'];
     const ITEMS_PER_PAGE = 20;
 
     let appData = {}; 
-    
-    // States for Overview Reorder Table
     let overviewReorderAllData = [];
     let overviewCurrentPage = 1;
-
-    // States for Main Data Table
     let currentCategoryView = null; 
     let mainTableFilteredData = [];
     let mainTableCurrentPage = 1;
     
-    // Chart instances
     let doughnutChartInstance = null;
     let barChartInstance = null;
     let lineChartInstance = null; 
+    let orderTargetItem = null; // Holds item data for modal
 
-    // DOM Elements
     const loadingIndicator = document.getElementById('loadingIndicator');
     const pageTitle = document.getElementById('pageTitle');
     const navItems = document.querySelectorAll('.nav-item');
     const viewSections = document.querySelectorAll('.view-section');
 
-    // Utility: Parse CSV robustly
-    function parseCSV(csv) {
-        const lines = [];
-        let currentLine = [];
-        let currentCell = '';
-        let insideQuotes = false;
-
-        for (let i = 0; i < csv.length; i++) {
-            const char = csv[i];
-            const nextChar = csv[i + 1];
-
-            if (char === '"') {
-                if (insideQuotes && nextChar === '"') {
-                    currentCell += '"'; i++;
-                } else {
-                    insideQuotes = !insideQuotes;
+    // Fetch data from Apps Script via GET
+    async function fetchAllData() {
+        if(SCRIPT_URL === 'GANTIKAN_DENGAN_URL_APP_SCRIPT_ANDA_DI_SINI') {
+            showToast('Sila masukkan SCRIPT_URL di dalam fail HTML untuk menyambung ke DB.', true);
+            return;
+        }
+        loadingIndicator.classList.remove('hidden');
+        try {
+            const response = await fetch(SCRIPT_URL);
+            const json = await response.json();
+            
+            if(json.status === 'success') {
+                // Tambah tag _CATEGORY untuk mapping
+                appData = {};
+                for (const cat in json.data) {
+                    appData[cat] = json.data[cat].map(item => ({...item, _CATEGORY: cat}));
                 }
-            } else if (char === ',' && !insideQuotes) {
-                currentLine.push(currentCell.trim()); currentCell = '';
-            } else if (char === '\n' && !insideQuotes) {
-                currentLine.push(currentCell.trim()); lines.push(currentLine);
-                currentLine = []; currentCell = '';
-            } else if (char !== '\r') {
-                currentCell += char;
+                // Pastikan pre-defined kategori sentiasa ada kuncinya
+                predefinedCategories.forEach(cat => { if(!appData[cat]) appData[cat] = []; });
+                
+                renderOverview();
+                if(currentCategoryView) prepareMainTableData(currentCategoryView, document.getElementById('tableSearch').value);
+            } else {
+                throw new Error(json.message);
             }
+        } catch (error) {
+            console.error('Fetch error:', error);
+            showToast('Gagal menarik data dari DB. Sila cuba sebentar lagi.', true);
+        } finally {
+            loadingIndicator.classList.add('hidden');
         }
-        if (currentLine.length > 0 || currentCell !== '') {
-            currentLine.push(currentCell.trim()); lines.push(currentLine);
-        }
-
-        if (lines.length < 2) return [];
-
-        const headers = lines[0].map(h => h.toUpperCase());
-        const data = [];
-        
-        for (let i = 1; i < lines.length; i++) {
-            if (lines[i].length === 1 && lines[i][0] === "") continue;
-            const row = {};
-            for (let j = 0; j < headers.length; j++) {
-                row[headers[j]] = lines[i][j] || '';
-            }
-            if (row['ITEM NAME']) data.push(row);
-        }
-        return data;
     }
 
-    // Fetch data concurrently
-    async function fetchAllData() {
+    // Tembak Data ke DB (POST)
+    async function updateDatabase(itemsPayload) {
+        if(SCRIPT_URL === 'GANTIKAN_DENGAN_URL_APP_SCRIPT_ANDA_DI_SINI') {
+            showToast("DB URL tiada.", true); return;
+        }
         loadingIndicator.classList.remove('hidden');
-        const promises = Object.entries(categories).map(async ([name, gid]) => {
-            try {
-                const response = await fetch(`${baseUrl}${gid}&_t=${new Date().getTime()}`);
-                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-                const csvText = await response.text();
-                // Store category name in each item for cross-reference
-                let parsed = parseCSV(csvText);
-                parsed = parsed.map(item => ({...item, _CATEGORY: name})); 
-                appData[name] = parsed;
-            } catch (error) {
-                console.error(`Failed to fetch ${name}:`, error);
-                appData[name] = []; 
+        loadingIndicator.innerHTML = `<img src="https://i.postimg.cc/CKN201K0/image.png" class="w-5 h-5 rounded-full animate-spin"> Menyimpan ke DB...`;
+        
+        try {
+            const response = await fetch(SCRIPT_URL, {
+                method: 'POST',
+                headers: { "Content-Type": "text/plain;charset=utf-8" }, // Mengelakkan isu Pre-flight CORS
+                body: JSON.stringify({ action: 'updateStock', items: itemsPayload })
+            });
+            const result = await response.json();
+            
+            if(result.status === 'success') {
+                showToast("Berjaya disimpan di Pangkalan Data!");
+                document.getElementById('stockFormContainer').innerHTML = ''; // Reset Form
+                addStockRow();
+                await fetchAllData(); // Reload live data
+            } else {
+                throw new Error(result.message);
             }
-        });
-
-        await Promise.all(promises);
-        loadingIndicator.classList.add('hidden');
-        renderOverview();
+        } catch (error) {
+            console.error('Error saving:', error);
+            showToast("Gagal menyimpan: " + error.message, true);
+        } finally {
+            loadingIndicator.innerHTML = `<img src="https://i.postimg.cc/CKN201K0/image.png" class="w-5 h-5 rounded-full animate-spin"> Syncing with DB...`;
+            loadingIndicator.classList.add('hidden');
+        }
     }
 
     function renderOverview() {
-        let totalItems = 0;
-        let lowStockCount = 0;
-        let reorderCount = 0; 
-        let barItemsCount = 0;
-        let kitchenItemsCount = 0;
+        let totalItems = 0; let lowStockCount = 0; let reorderCount = 0; 
+        let barItemsCount = 0; let kitchenItemsCount = 0;
         
         overviewReorderAllData = [];
         let itemsPerCategory = {};
@@ -503,68 +468,48 @@
         for (const [catName, items] of Object.entries(appData)) {
             totalItems += items.length;
             itemsPerCategory[catName] = items.length;
-            
             if (catName === 'Beverage') barItemsCount = items.length;
             if (catName === 'Foods') kitchenItemsCount = items.length;
 
             let catTotalStock = 0;
-            
             items.forEach(item => {
                 const current = parseInt(item['CURRENT STOCK']) || 0;
                 const stockIn = parseInt(item['STOCK IN']) || 0;
-                
                 catTotalStock += current;
 
                 const minStockCalc = Math.ceil(stockIn * 0.15); 
                 const isStatusLow = item['STATUS'] && item['STATUS'].toLowerCase().includes('low');
                 
-                if (current <= minStockCalc || isStatusLow || current <= 5) {
-                    lowStockCount++;
-                }
-                if (current === 0 || (item['STATUS'] && item['STATUS'].toLowerCase().includes('out'))) {
-                    reorderCount++;
-                }
+                if (current <= minStockCalc || isStatusLow || current <= 5) lowStockCount++;
+                if (current === 0 || (item['STATUS'] && item['STATUS'].toLowerCase().includes('out'))) reorderCount++;
 
-                // Add to flat reorder list if low stock
                 if (current <= minStockCalc || current <= 5 || isStatusLow) {
                     overviewReorderAllData.push({
-                        name: item['ITEM NAME'],
-                        current: current,
-                        min: minStockCalc > 0 ? minStockCalc : 3,
-                        unit: item['UNIT'],
-                        category: catName
+                        name: item['ITEM NAME'], current: current, min: minStockCalc > 0 ? minStockCalc : 3,
+                        unit: item['UNIT'], category: catName, location: item['LOCATION'], vendor: item['VENDOR']
                     });
                 }
             });
-            
             stockPerCategory[catName] = catTotalStock;
         }
 
-        // Update KPI Cards
         document.getElementById('kpiTotal').innerText = totalItems;
         document.getElementById('kpiLowStock').innerText = lowStockCount;
         document.getElementById('kpiReorder').innerText = reorderCount;
         document.getElementById('kpiBar').innerText = barItemsCount;
         document.getElementById('kpiKitchen').innerText = kitchenItemsCount;
 
-        // Render Reorder Table (Paginated)
         overviewReorderAllData.sort((a, b) => a.current - b.current);
         overviewCurrentPage = 1;
         renderOverviewReorderTable();
-
-        // Render Charts
         renderCharts(itemsPerCategory, stockPerCategory, totalItems, lowStockCount);
     }
 
-    // -- Pagination Logic for Overview Reorder List --
     function renderOverviewReorderTable() {
         const tbody = document.getElementById('reorderListTbody');
         tbody.innerHTML = '';
-        
         const totalRows = overviewReorderAllData.length;
         const totalPages = Math.ceil(totalRows / ITEMS_PER_PAGE) || 1;
-        
-        // Safety bound
         if (overviewCurrentPage < 1) overviewCurrentPage = 1;
         if (overviewCurrentPage > totalPages) overviewCurrentPage = totalPages;
 
@@ -575,30 +520,34 @@
         if (pageData.length === 0) {
             tbody.innerHTML = `<tr><td colspan="4" class="py-4 text-center text-gray-400">All stocks are at healthy levels.</td></tr>`;
         } else {
-            pageData.forEach(item => {
+            pageData.forEach((item, idx) => {
                 const tr = document.createElement('tr');
                 tr.className = 'hover:bg-gray-50 transition-colors';
+                
+                // Construct logic for Order Button safely
+                const orderBtn = document.createElement('button');
+                orderBtn.className = "px-3 py-1 bg-brand-primary text-white text-xs rounded-lg hover:bg-brand-primaryDark shadow-sm transition-colors";
+                orderBtn.innerText = "Order";
+                orderBtn.onclick = () => openOrderModal(item);
+
+                const tdAction = document.createElement('td');
+                tdAction.className = "py-3 text-right";
+                tdAction.appendChild(orderBtn);
+
                 tr.innerHTML = `
                     <td class="py-3 font-medium text-gray-800">
-                        ${item.name}
-                        <div class="text-[10px] text-gray-400 font-normal uppercase">${item.category}</div>
+                        ${item.name} <div class="text-[10px] text-gray-400 font-normal uppercase">${item.category}</div>
                     </td>
-                    <td class="py-3 text-center">
-                        <span class="${item.current === 0 ? 'text-red-500 font-bold' : 'text-gray-800 font-semibold'}">${item.current}</span>
-                    </td>
+                    <td class="py-3 text-center"><span class="${item.current === 0 ? 'text-red-500 font-bold' : 'text-gray-800 font-semibold'}">${item.current}</span></td>
                     <td class="py-3 text-center text-gray-500">${item.min}</td>
-                    <td class="py-3 text-right">
-                        <button class="px-3 py-1 bg-brand-primary text-white text-xs rounded-lg hover:bg-brand-primaryDark shadow-sm transition-colors">Order</button>
-                    </td>
                 `;
+                tr.appendChild(tdAction);
                 tbody.appendChild(tr);
             });
         }
 
-        // Update Overview Pagination UI
         document.getElementById('reorderTableShowing').innerText = `Showing ${pageData.length > 0 ? startIdx + 1 : 0} - ${Math.min(endIdx, totalRows)} of ${totalRows} entries`;
         document.getElementById('reorderPageInd').innerText = `Page ${overviewCurrentPage} of ${totalPages}`;
-        
         document.getElementById('reorderPrevBtn').disabled = overviewCurrentPage === 1;
         document.getElementById('reorderNextBtn').disabled = overviewCurrentPage === totalPages;
     }
@@ -606,12 +555,62 @@
     document.getElementById('reorderPrevBtn').addEventListener('click', () => { overviewCurrentPage--; renderOverviewReorderTable(); });
     document.getElementById('reorderNextBtn').addEventListener('click', () => { overviewCurrentPage++; renderOverviewReorderTable(); });
 
+    function openOrderModal(item) {
+        orderTargetItem = item;
+        document.getElementById('orderModalItem').innerText = item.name + ' (' + item.category + ')';
+        document.getElementById('orderModalQty').value = '';
+        
+        const modal = document.getElementById('orderModal');
+        const modalInner = document.getElementById('orderModalInner');
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        
+        // Timeout for transition effect
+        setTimeout(() => {
+            modal.classList.remove('opacity-0');
+            modalInner.classList.remove('scale-95');
+        }, 10);
+    }
+
+    function closeOrderModal() {
+        const modal = document.getElementById('orderModal');
+        const modalInner = document.getElementById('orderModalInner');
+        modal.classList.add('opacity-0');
+        modalInner.classList.add('scale-95');
+        
+        setTimeout(() => {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            orderTargetItem = null;
+        }, 300);
+    }
+
+    document.getElementById('orderModalCancel').addEventListener('click', closeOrderModal);
+    
+    document.getElementById('orderModalConfirm').addEventListener('click', () => {
+        const qty = parseInt(document.getElementById('orderModalQty').value);
+        if(!qty || qty <= 0) { showToast("Sila masukkan kuantiti yang sah.", true); return; }
+        
+        if(orderTargetItem) {
+            const payload = [{
+                category: orderTargetItem.category,
+                itemName: orderTargetItem.name,
+                stockIn: qty,
+                stockUsed: 0,
+                unit: orderTargetItem.unit,
+                location: orderTargetItem.location,
+                vendor: orderTargetItem.vendor
+            }];
+            closeOrderModal();
+            updateDatabase(payload);
+        }
+    });
+
     function prepareMainTableData(categoryName, searchTerm = '') {
         currentCategoryView = categoryName;
         let rawData = [];
 
         if (categoryName === 'Low Stock') {
-            // Aggregate low stock from ALL categories
             for (const cat in appData) {
                 appData[cat].forEach(item => {
                     const current = parseInt(item['CURRENT STOCK']) || 0;
@@ -619,18 +618,14 @@
                     const minStockCalc = Math.ceil(stockIn * 0.15);
                     const isStatusLow = item['STATUS'] && item['STATUS'].toLowerCase().includes('low');
                     
-                    if (current <= minStockCalc || isStatusLow || current <= 5) {
-                        rawData.push(item);
-                    }
+                    if (current <= minStockCalc || isStatusLow || current <= 5) rawData.push(item);
                 });
             }
-            // Sort by lowest stock first
             rawData.sort((a, b) => (parseInt(a['CURRENT STOCK']) || 0) - (parseInt(b['CURRENT STOCK']) || 0));
         } else {
             rawData = appData[categoryName] || [];
         }
 
-        // Filter by Search Term
         if (searchTerm) {
             const lowerSearch = searchTerm.toLowerCase();
             mainTableFilteredData = rawData.filter(item => {
@@ -640,7 +635,6 @@
             mainTableFilteredData = [...rawData];
         }
 
-        // Reset to page 1 and render
         mainTableCurrentPage = 1;
         renderMainTablePage();
     }
@@ -648,10 +642,8 @@
     function renderMainTablePage() {
         const tbody = document.getElementById('dataTableBody');
         tbody.innerHTML = '';
-        
         const totalRows = mainTableFilteredData.length;
         const totalPages = Math.ceil(totalRows / ITEMS_PER_PAGE) || 1;
-        
         if (mainTableCurrentPage < 1) mainTableCurrentPage = 1;
         if (mainTableCurrentPage > totalPages) mainTableCurrentPage = totalPages;
 
@@ -663,10 +655,7 @@
             const tr = document.createElement('tr');
             tr.className = 'hover:bg-brand-primaryLight/30 transition-colors group';
             
-            const stockIn = parseInt(item['STOCK IN']) || 0;
-            const used = parseInt(item['STOCK USED']) || 0;
             const current = parseInt(item['CURRENT STOCK']) || 0;
-            
             let status = item['STATUS'] || '-';
             let statusClass = 'bg-gray-100 text-gray-600';
             if(status.toLowerCase().includes('ok') || status.toLowerCase().includes('good')) statusClass = 'bg-green-100 text-green-700';
@@ -674,7 +663,6 @@
             if(status.toLowerCase().includes('critical') || status.toLowerCase().includes('out') || current === 0) statusClass = 'bg-red-100 text-red-700';
 
             const rowNumber = currentCategoryView === 'Low Stock' ? startIdx + index + 1 : item['NO'] || (startIdx + index + 1);
-            
             const itemNameDisplay = currentCategoryView === 'Low Stock' 
                 ? `${item['ITEM NAME']} <br><span class="text-[10px] text-red-400 font-bold uppercase tracking-wider">${item._CATEGORY}</span>`
                 : item['ITEM NAME'];
@@ -684,24 +672,19 @@
                 <td class="px-6 py-4 font-medium text-gray-900">${itemNameDisplay}</td>
                 <td class="px-6 py-4 text-gray-500 whitespace-nowrap">${item['UNIT'] || '-'}</td>
                 <td class="px-6 py-4 text-gray-500 text-xs whitespace-nowrap">${item['LOCATION'] || '-'}</td>
-                <td class="px-6 py-4 text-right">${stockIn}</td>
-                <td class="px-6 py-4 text-right">${used}</td>
+                <td class="px-6 py-4 text-right">${parseInt(item['STOCK IN']) || 0}</td>
+                <td class="px-6 py-4 text-right">${parseInt(item['STOCK USED']) || 0}</td>
                 <td class="px-6 py-4 text-right font-bold text-brand-primary text-lg">${current}</td>
-                <td class="px-6 py-4 text-center">
-                    <span class="px-2 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${statusClass} whitespace-nowrap">${status}</span>
-                </td>
+                <td class="px-6 py-4 text-center"><span class="px-2 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${statusClass} whitespace-nowrap">${status}</span></td>
                 <td class="px-6 py-4 text-gray-500 text-xs truncate max-w-[120px]" title="${item['VENDOR'] || '-'}">${item['VENDOR'] || '-'}</td>
             `;
             tbody.appendChild(tr);
         });
 
-        if (pageData.length === 0) {
-            tbody.innerHTML = `<tr><td colspan="9" class="text-center py-10 text-gray-400">No data found in this category.</td></tr>`;
-        }
+        if (pageData.length === 0) tbody.innerHTML = `<tr><td colspan="9" class="text-center py-10 text-gray-400">No data found.</td></tr>`;
         
         document.getElementById('tableShowingText').innerText = `Showing ${pageData.length > 0 ? startIdx + 1 : 0} to ${Math.min(endIdx, totalRows)} of ${totalRows} entries`;
         document.getElementById('mainPageInd').innerText = `${mainTableCurrentPage} / ${totalPages}`;
-        
         document.getElementById('mainPrevBtn').disabled = mainTableCurrentPage === 1;
         document.getElementById('mainNextBtn').disabled = mainTableCurrentPage === totalPages;
     }
@@ -711,7 +694,6 @@
 
     function activateNav(targetId, category) {
         navItems.forEach(n => n.classList.remove('active'));
-        
         let activeLink = Array.from(navItems).find(n => n.getAttribute('data-target') === targetId && n.getAttribute('data-category') === category);
         if(!activeLink && targetId === 'view-overview') activeLink = Array.from(navItems).find(n => n.getAttribute('data-target') === 'view-overview');
         if(!activeLink && targetId === 'view-stock-form') activeLink = Array.from(navItems).find(n => n.getAttribute('data-target') === 'view-stock-form');
@@ -731,35 +713,24 @@
             prepareMainTableData(category);
         } else if (targetId === 'view-stock-form') {
             pageTitle.innerText = 'Manage Stock';
-            // Auto inject 1st row if empty
-            if (document.getElementById('stockFormContainer').children.length === 0) {
-                addStockRow();
-            }
+            if (document.getElementById('stockFormContainer').children.length === 0) addStockRow();
         }
     }
 
     navItems.forEach(item => {
-        item.addEventListener('click', (e) => {
-            e.preventDefault();
-            activateNav(item.getAttribute('data-target'), item.getAttribute('data-category'));
-        });
+        item.addEventListener('click', (e) => { e.preventDefault(); activateNav(item.getAttribute('data-target'), item.getAttribute('data-category')); });
     });
 
-    document.getElementById('kpiLowStockCard').addEventListener('click', () => {
-        activateNav('view-table', 'Low Stock');
-    });
-
-    document.getElementById('tableSearch').addEventListener('input', (e) => {
-        if (currentCategoryView) {
-            prepareMainTableData(currentCategoryView, e.target.value);
-        }
-    });
+    document.getElementById('kpiLowStockCard').addEventListener('click', () => activateNav('view-table', 'Low Stock'));
+    document.getElementById('tableSearch').addEventListener('input', (e) => { if (currentCategoryView) prepareMainTableData(currentCategoryView, e.target.value); });
 
     function addStockRow() {
         const container = document.getElementById('stockFormContainer');
         const row = document.createElement('div');
         row.className = 'stock-row bg-gray-50/50 p-5 rounded-2xl border border-gray-100 relative group transition-all hover:border-gray-200 hover:shadow-sm';
         
+        const catOptions = (Object.keys(appData).length > 0 ? Object.keys(appData) : predefinedCategories).map(cat => `<option value="${cat}">${cat}</option>`).join('');
+
         row.innerHTML = `
             <button class="remove-row-btn absolute -top-3 -right-3 w-8 h-8 bg-red-100 text-red-500 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all hover:bg-red-500 hover:text-white shadow-sm hover:scale-110">
                 <i class="ph ph-x text-sm font-bold"></i>
@@ -769,7 +740,7 @@
                     <label class="block text-[11px] font-bold text-gray-500 mb-1.5 uppercase tracking-wider">Category</label>
                     <select class="cat-select w-full p-2.5 bg-white border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-brand-primary/20 outline-none transition-shadow text-gray-700">
                         <option value="">Select Category...</option>
-                        ${Object.keys(categories).map(cat => `<option value="${cat}">${cat}</option>`).join('')}
+                        ${catOptions}
                     </select>
                 </div>
                 <div>
@@ -789,7 +760,6 @@
                 </div>
             </div>
             
-            <!-- Extra Fields for New Item -->
             <div class="new-item-fields hidden grid-cols-1 md:grid-cols-3 gap-5 mt-5 pt-5 border-t border-gray-200/60">
                  <div>
                     <label class="block text-[11px] font-bold text-gray-400 mb-1.5 uppercase tracking-wider">Unit (e.g., Kg, Pcs)</label>
@@ -818,73 +788,40 @@
         const newItemFields = row.querySelector('.new-item-fields');
         
         removeBtn.addEventListener('click', () => {
-            row.style.opacity = '0';
-            row.style.transform = 'scale(0.95)';
+            row.style.opacity = '0'; row.style.transform = 'scale(0.95)';
             setTimeout(() => row.remove(), 200);
         });
         
         catSelect.addEventListener('change', (e) => {
             const cat = e.target.value;
             itemSelect.innerHTML = '<option value="">Select Item...</option>';
-            newItemName.classList.add('hidden');
-            newItemFields.classList.add('hidden');
-            newItemFields.classList.remove('grid');
+            newItemName.classList.add('hidden'); newItemFields.classList.add('hidden'); newItemFields.classList.remove('grid');
             
-            if (!cat) {
-                itemSelect.disabled = true;
-                return;
-            }
+            if (!cat) { itemSelect.disabled = true; return; }
             itemSelect.disabled = false;
             
-            // Populate items from appData sorted alphabetically
             if (appData[cat] && appData[cat].length > 0) {
                 const sortedItems = [...appData[cat]].sort((a,b) => (a['ITEM NAME']||'').localeCompare(b['ITEM NAME']||''));
                 sortedItems.forEach(item => {
-                    const opt = document.createElement('option');
-                    opt.value = item['ITEM NAME'];
-                    opt.textContent = item['ITEM NAME'];
+                    const opt = document.createElement('option'); opt.value = item['ITEM NAME']; opt.textContent = item['ITEM NAME'];
                     itemSelect.appendChild(opt);
                 });
             }
             
-            // Add 'New Item' option at the end
-            const newOpt = document.createElement('option');
-            newOpt.value = '__NEW__';
-            newOpt.textContent = '+ Add New Item...';
+            const newOpt = document.createElement('option'); newOpt.value = '__NEW__'; newOpt.textContent = '+ Add New Item...';
             newOpt.className = 'font-bold text-brand-primary bg-brand-primaryLight/50';
             itemSelect.appendChild(newOpt);
         });
         
         itemSelect.addEventListener('change', (e) => {
             if (e.target.value === '__NEW__') {
-                newItemName.classList.remove('hidden');
-                newItemFields.classList.remove('hidden');
-                newItemFields.classList.add('grid');
+                newItemName.classList.remove('hidden'); newItemFields.classList.remove('hidden'); newItemFields.classList.add('grid');
                 newItemName.focus();
             } else {
-                newItemName.classList.add('hidden');
-                newItemFields.classList.add('hidden');
-                newItemFields.classList.remove('grid');
+                newItemName.classList.add('hidden'); newItemFields.classList.add('hidden'); newItemFields.classList.remove('grid');
                 newItemName.value = '';
             }
         });
-    }
-
-    function showToast(msg, isError = false) {
-        const toast = document.getElementById('toastNotification');
-        const icon = toast.querySelector('i');
-        document.getElementById('toastMsg').innerText = msg;
-        
-        if (isError) {
-            icon.className = 'ph ph-warning-circle text-yellow-400 text-2xl';
-            toast.classList.replace('bg-gray-900', 'bg-red-900');
-        } else {
-            icon.className = 'ph ph-check-circle text-green-400 text-2xl';
-            toast.classList.replace('bg-red-900', 'bg-gray-900');
-        }
-        
-        toast.classList.remove('translate-y-20', 'opacity-0');
-        setTimeout(() => toast.classList.add('translate-y-20', 'opacity-0'), 4000);
     }
 
     document.getElementById('addStockRowBtn').addEventListener('click', addStockRow);
@@ -893,7 +830,7 @@
         const rows = document.querySelectorAll('.stock-row');
         if (rows.length === 0) return;
         
-        let updatesCount = 0;
+        let payloadItems = [];
         let errorsCount = 0;
         
         rows.forEach(row => {
@@ -902,159 +839,88 @@
             const stockInVal = parseInt(row.querySelector('.stock-in-input').value) || 0;
             const stockUsedVal = parseInt(row.querySelector('.stock-used-input').value) || 0;
             
-            if (!cat || !itemVal) return; // Ignore incomplete rows
-            if (stockInVal === 0 && stockUsedVal === 0 && itemVal !== '__NEW__') return; // Ignore if no qty changed
+            if (!cat || !itemVal) return; 
+            if (stockInVal === 0 && stockUsedVal === 0 && itemVal !== '__NEW__') return; 
             
             if (itemVal === '__NEW__') {
                 const newName = row.querySelector('.new-item-name').value.trim();
                 if (!newName) { errorsCount++; return; }
-                
-                const unit = row.querySelector('.unit-input').value;
-                const location = row.querySelector('.location-input').value;
-                const vendor = row.querySelector('.vendor-input').value;
-                
-                const current = stockInVal - stockUsedVal;
-                let status = current > 10 ? 'Good' : (current > 0 ? 'Low Stock' : 'Out of Stock');
-                
-                // Add completely new item to local appData state
-                appData[cat].push({
-                    'NO': appData[cat].length + 1,
-                    'ITEM NAME': newName,
-                    'UNIT': unit || '-',
-                    'LOCATION': location || '-',
-                    'STOCK IN': stockInVal.toString(),
-                    'STOCK USED': stockUsedVal.toString(),
-                    'CURRENT STOCK': current.toString(),
-                    'STATUS': status,
-                    'VENDOR': vendor || '-',
-                    '_CATEGORY': cat
+                payloadItems.push({
+                    category: cat, itemName: newName, stockIn: stockInVal, stockUsed: stockUsedVal,
+                    unit: row.querySelector('.unit-input').value, location: row.querySelector('.location-input').value, vendor: row.querySelector('.vendor-input').value
                 });
-                updatesCount++;
             } else {
-                // Find existing item and update values
-                const itemObj = appData[cat].find(i => i['ITEM NAME'] === itemVal);
-                if (itemObj) {
-                    const oldIn = parseInt(itemObj['STOCK IN']) || 0;
-                    const oldUsed = parseInt(itemObj['STOCK USED']) || 0;
-                    
-                    const newIn = oldIn + stockInVal;
-                    const newUsed = oldUsed + stockUsedVal;
-                    const current = newIn - newUsed;
-                    
-                    itemObj['STOCK IN'] = newIn.toString();
-                    itemObj['STOCK USED'] = newUsed.toString();
-                    itemObj['CURRENT STOCK'] = current.toString();
-                    
-                    // Recalculate status based on new parameters
-                    const minStockCalc = Math.ceil(newIn * 0.15);
-                    if (current <= 0) itemObj['STATUS'] = 'Out of Stock';
-                    else if (current <= minStockCalc || current <= 5) itemObj['STATUS'] = 'Low Stock';
-                    else itemObj['STATUS'] = 'Good';
-                    
-                    updatesCount++;
-                }
+                payloadItems.push({
+                    category: cat, itemName: itemVal, stockIn: stockInVal, stockUsed: stockUsedVal
+                });
             }
         });
         
-        if (updatesCount > 0) {
-            showToast(`Successfully updated ${updatesCount} item(s) in local memory!`);
-            // Clear the form and add one blank row
-            document.getElementById('stockFormContainer').innerHTML = '';
-            addStockRow();
-            
-            // Re-render everything with new data
-            renderOverview();
-            if (currentCategoryView) {
-                prepareMainTableData(currentCategoryView, document.getElementById('tableSearch').value);
-            }
+        if (payloadItems.length > 0) {
+            updateDatabase(payloadItems);
         } else if (errorsCount > 0) {
-            showToast("Failed to save: Make sure new items have a name.", true);
+            showToast("Gagal: Sila pastikan item baru mempunyai nama.", true);
         } else {
-            showToast("No changes were made.", true);
+            showToast("Tiada sebarang input atau perubahan dikesan.", true);
         }
     });
 
-    function renderCharts(itemsPerCategory, stockPerCategory, totalItems, lowStockCount) {
-        Chart.defaults.font.family = 'Inter';
-        Chart.defaults.color = '#64748b';
+    function showToast(msg, isError = false) {
+        const toast = document.getElementById('toastNotification');
+        const icon = toast.querySelector('i');
+        document.getElementById('toastMsg').innerText = msg;
+        
+        if (isError) {
+            icon.className = 'ph ph-warning-circle text-yellow-400 text-2xl'; toast.classList.replace('bg-gray-900', 'bg-red-900');
+        } else {
+            icon.className = 'ph ph-check-circle text-green-400 text-2xl'; toast.classList.replace('bg-red-900', 'bg-gray-900');
+        }
+        
+        toast.classList.remove('translate-y-20', 'opacity-0');
+        setTimeout(() => toast.classList.add('translate-y-20', 'opacity-0'), 4000);
+    }
 
-        // 1. Bar Chart
+    function renderCharts(itemsPerCategory, stockPerCategory, totalItems, lowStockCount) {
+        Chart.defaults.font.family = 'Inter'; Chart.defaults.color = '#64748b';
+        
         const ctxBar = document.getElementById('deptBarChart').getContext('2d');
         if (barChartInstance) barChartInstance.destroy();
         barChartInstance = new Chart(ctxBar, {
             type: 'bar',
             data: {
                 labels: Object.keys(itemsPerCategory),
-                datasets: [{
-                    label: 'Total Items',
-                    data: Object.values(itemsPerCategory),
-                    backgroundColor: ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6'],
-                    borderRadius: 4,
-                    barPercentage: 0.6,
-                }]
+                datasets: [{ label: 'Total Items', data: Object.values(itemsPerCategory), backgroundColor: ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6'], borderRadius: 4, barPercentage: 0.6 }]
             },
-            options: {
-                responsive: true, maintainAspectRatio: false,
-                plugins: { legend: { display: false } },
-                scales: {
-                    y: { beginAtZero: true, grid: { color: '#f1f5f9' }, border: { dash: [4, 4] } },
-                    x: { grid: { display: false } }
-                }
-            }
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, grid: { color: '#f1f5f9' }, border: { dash: [4, 4] } }, x: { grid: { display: false } } } }
         });
 
-        // 2. Doughnut Chart
         const ctxDoughnut = document.getElementById('healthDoughnutChart').getContext('2d');
         if (doughnutChartInstance) doughnutChartInstance.destroy();
         document.getElementById('doughnutTotalText').innerText = totalItems;
-        const healthyItems = totalItems - lowStockCount;
-
         doughnutChartInstance = new Chart(ctxDoughnut, {
             type: 'doughnut',
-            data: {
-                labels: ['Healthy', 'Low/Out'],
-                datasets: [{
-                    data: [healthyItems, lowStockCount],
-                    backgroundColor: ['#16a34a', '#e2e8f0'],
-                    borderWidth: 0, hoverOffset: 4
-                }]
-            },
-            options: {
-                responsive: true, maintainAspectRatio: false, cutout: '75%',
-                plugins: { legend: { position: 'bottom', labels: { usePointStyle: true, padding: 20 } } }
-            }
+            data: { labels: ['Healthy', 'Low/Out'], datasets: [{ data: [totalItems - lowStockCount, lowStockCount], backgroundColor: ['#16a34a', '#e2e8f0'], borderWidth: 0, hoverOffset: 4 }] },
+            options: { responsive: true, maintainAspectRatio: false, cutout: '75%', plugins: { legend: { position: 'bottom', labels: { usePointStyle: true, padding: 20 } } } }
         });
 
-        // 3. Line Chart
         const ctxLine = document.getElementById('levelLineChart').getContext('2d');
         if (lineChartInstance) lineChartInstance.destroy();
         lineChartInstance = new Chart(ctxLine, {
             type: 'line',
             data: {
                 labels: Object.keys(stockPerCategory),
-                datasets: [{
-                    label: 'Current Total Units',
-                    data: Object.values(stockPerCategory),
-                    borderColor: '#ef4444',
-                    backgroundColor: 'rgba(239, 68, 68, 0.1)',
-                    borderWidth: 2, pointBackgroundColor: '#ffffff',
-                    pointBorderColor: '#ef4444', pointBorderWidth: 2, pointRadius: 4,
-                    fill: true, tension: 0.4 
-                }]
+                datasets: [{ label: 'Current Total Units', data: Object.values(stockPerCategory), borderColor: '#ef4444', backgroundColor: 'rgba(239, 68, 68, 0.1)', borderWidth: 2, pointBackgroundColor: '#ffffff', pointBorderColor: '#ef4444', pointBorderWidth: 2, pointRadius: 4, fill: true, tension: 0.4 }]
             },
-            options: {
-                responsive: true, maintainAspectRatio: false,
-                plugins: { legend: { display: false } },
-                scales: {
-                    y: { beginAtZero: true, grid: { color: '#f1f5f9' } },
-                    x: { grid: { display: false } }
-                }
-            }
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, grid: { color: '#f1f5f9' } }, x: { grid: { display: false } } } }
         });
     }
 
-    // Initialize
-    document.addEventListener('DOMContentLoaded', fetchAllData);
+    // Initialize application
+    document.addEventListener('DOMContentLoaded', () => {
+        // Init a blank form row on boot
+        addStockRow();
+        fetchAllData();
+    });
 
 </script>
 </body>
